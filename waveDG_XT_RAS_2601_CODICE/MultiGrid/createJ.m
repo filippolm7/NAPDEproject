@@ -1,5 +1,5 @@
 function [J]= createJ(n)
-
+% Code to 
 m = n/2;
 j1 = 1;
 j2 = 1;

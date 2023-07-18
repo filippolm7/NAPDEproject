@@ -1,7 +1,14 @@
-function [Aj,bj] = blockalize(A,b)
+function [Aj,bj] = blockalize(A,b,n)
+    % This function creates the block matrices from A and b, performing an
+    % elimination of half the rows (n-times)
+
+    k = size(A,1);
+    J = createJ(k);
     
-    n = size(A,1);
-    J = createJ(n);
+    
+    J =  coarserJ(J,n);
+    
+    % Blockalizes the system matrices
     Aj = J*A*(J');
     bj = J*b;
     

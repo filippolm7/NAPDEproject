@@ -1,7 +1,21 @@
 % DG discretization
 % IP and IPh formulation
 
-function [A,b,femregion,Solutions, ERROR, INFO] = XT_DG_run(Data,alpha,formulation,plot_sol)
+function [A,b,femregion,Data] = XT_DG_run(Data,formulation)
+
+
+% mesh in MeshErrorAnalysis
+mesh='ProvaMONO_0105_20100_el.mat';  
+Data.X=1;
+Data.T=5;       % domain [0,1]x[0,5]
+Data.NT =20;     % Default 20 elem in space, 100 in time
+Data.NX = 100;
+Data.damp=0; % DAMPING
+Data.nqn = 2*Data.Degree + 1;
+Data.meshfile=mesh;
+
+mu=400;
+alpha=mu*(Data.X/Data.NX)/(Data.Degree*Data.Degree); %do not touch 
 
 Data.fem = Data.Degree;
 Data.alp=alpha;
@@ -78,30 +92,6 @@ else
 end
 disp('Done')
 disp('------------------------------------------------------')
-
-
-%% Solve
-uh_wh=MatricesAc.block\fx_a;
-m=size(uh_wh)/2;
-wh=uh_wh((m+1):end);
-uh=uh_wh(1:m);
-Solutions.phi_h=uh;
-Solutions.dot_phi_h=wh;
-
-
-%% scatter plot of the solution 
-if plot_sol==1
-
-    [GUp,GWp,Gphi,GUe] = plot_solution_dis(Data,femregion,Solutions,0.1); %t=0.1
-    scatter_plot(GUp,GWp,Gphi,GUe,0,Data); 
-end
-
-
-%% Compute Errors
-% missing part not studied in this project
-
-ERROR=-1;
-INFO=-1;
 
 
 %% return
