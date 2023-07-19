@@ -1,6 +1,19 @@
 function [J]= createJ(n)
-% Code to 
+
+% Code to create the matrix necessary to make A a block matrix, i.e. to
+% pass from a (uh1,uh2,...,uhm,wh1,wh2,...,whm) system into a
+% (uh1,wh1,uh2,wh2,...,uhm,whm) system
+
+% Made considering FEM matrices with 2nd order polynomials, made of 6x6
+% blocks
+
+if rem(n,2) ~= 0
+    disp("Error, input must be an even number")
+    return
+end
+
 m = n/2;
+
 j1 = 1;
 j2 = 1;
 J = sparse(n,n);

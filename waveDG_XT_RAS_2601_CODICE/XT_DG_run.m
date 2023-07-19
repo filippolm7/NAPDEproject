@@ -25,6 +25,8 @@ Data.nqn = 2*Data.fem + 1;
 
 %% load meshfile
 load(Data.meshfile);
+
+
 disp('Uploading mesh...');
 disp('------------------------------------------------------')
 
