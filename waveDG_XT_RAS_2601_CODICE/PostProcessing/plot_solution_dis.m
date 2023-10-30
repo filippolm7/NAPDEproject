@@ -17,6 +17,7 @@ GUe  = zeros(1,6);
 kindp = 0;
 kinda = 0;
 kinde = 0;
+
 for ie=1:femregion.ne % loop over elements
     %     ie
 %     id_ie = femregion.id(ie);

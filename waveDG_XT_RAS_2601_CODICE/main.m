@@ -54,6 +54,15 @@ plot_sol=1;  %if 1 the solution is plotted
 
 %% Assemble 
 
+mesh='ProvaMONO_0105_20100_el.mat';
+Data.X=1;
+Data.T=5;       % domain [0,1]x[0,5]
+Data.NT =20;     % Default 20 elem in space, 100 in time
+Data.NX = 100;
+Data.damp=0; % DAMPING
+Data.nqn = 2*Data.Degree + 1;
+Data.meshfile=mesh;
+
 [A,b,femregion,Data] = XT_DG_run(Data,formulation);
 
 %% Solve
@@ -69,7 +78,6 @@ Solutions.dot_phi_h=wh;
 
 ERROR=-1;
 INFO=-1;
-
 
 
 %% scatter plot of the solution 

@@ -1,18 +1,7 @@
 % DG discretization
 % IP and IPh formulation
 
-function [A,b,femregion,Data] = XT_DG_run(Data,formulation)
-
-
-% mesh in MeshErrorAnalysis
-mesh='ProvaMONO_0105_20100_el.mat';  
-Data.X=1;
-Data.T=5;       % domain [0,1]x[0,5]
-Data.NT =20;     % Default 20 elem in space, 100 in time
-Data.NX = 100;
-Data.damp=0; % DAMPING
-Data.nqn = 2*Data.Degree + 1;
-Data.meshfile=mesh;
+function [A,b,femregion,Data] = XT_DG_run(Data,formulation,mesh)
 
 mu=400;
 alpha=mu*(Data.X/Data.NX)/(Data.Degree*Data.Degree); %do not touch 

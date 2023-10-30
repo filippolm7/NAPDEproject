@@ -78,19 +78,18 @@ elseif strcmp(test,'Test12')
     Data.rho_a = [1];
     Data.c     = [1];
     Data.b=[0;1];
-    Data.source_phi  = '(pi^2+1)*cos(pi*x).*exp(-y)';
-    Data.source_phit =  '0.*x';
+    Data.source_phi  = '1 + 0.*x.*y'; 
+    Data.source_phit =  '0 + 0.*x';
     % exact solution --> used to compute the initial conditions
 
-    Data.exact_phi  =  'exp(-y).*cos(pi*x)';
-    Data.exact_phi0  =  'cos(pi*x)';
+    Data.exact_phi  =  '(x.^2).*(1-x).*(sin(pi*x).^2)';
     Data.exact_phit =  '0.*x'; 
     Data.exact_dphit = '0.*x';
 
     % exact gradient --> used for the error analysis
-    Data.exact_dphi_x =  '-pi*exp(-y).*sin(pi*x)';
-    Data.exact_dphi_y =  '-exp(-y).*cos(pi*x)';
-    Data.exact_dphi_y0 =  '-cos(pi*x)';
+    Data.exact_dphi_x =  '0*x.*y';
+    Data.exact_dphi_y =  '0*x.*y';
+    Data.exact_dphi_y0 =  '0*x.*y';
 
 end
 
