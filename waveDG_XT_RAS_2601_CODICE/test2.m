@@ -50,9 +50,6 @@ Data.meshfile=mesh;
 [Aj,bj] = blockalize(A,b);
 
 
-uh_wh=Aj\bj;
-[uj,wj] = zoop(uh_wh);
-
 %% Assemble #2
 
 mesh='ProvaMONO_0105_20100_el.mat';
@@ -71,7 +68,32 @@ Data.meshfile=mesh;
 uh_wh=Ajj\bjj;
 [ujj,wjj] = zoop(uh_wh);
 
-R = RMatrix(size(Ajj,1),2);
+R = newRMatrix(size(Ajj,1),2);
 Ah = R*Ajj*R';
 bh = R*bjj;
+
+
+%% Test stampa
+
+mesh='ProvaMONO_0105_1050_el.mat';
+Data.X=1;
+Data.T=5;       % domain [0,1]x[0,5]
+Data.NT =10;     % Default 20 elem in space, 100 in time
+Data.NX = 50;
+Data.damp=0; % DAMPING
+Data.nqn = 2*Data.Degree + 1;
+Data.meshfile=mesh;
+[A,b,femregion,Data] = XT_DG_run(Data,formulation);
+
+uh_wh=Ah\bh;
+uh_wh = uh_wh;
+[uj,wj] = zoop(uh_wh);
+Solutions.phi_h=uj;
+Solutions.dot_phi_h=wj;
+
+if plot_sol==1
+
+    [GUp,GWp,Gphi,GUe] = plot_solution_dis(Data,femregion,Solutions,0.1); %t=0.1
+    scatter_plot(GUp,GWp,Gphi,GUe,0,Data); 
+end
 

@@ -65,7 +65,7 @@ Solutions.dot_phi_h=wj;
 %if plot_sol==1
 
   %  [GUp,GWp,Gphi,GUe] = plot_solution_dis(Data,femregion,Solutions,0.1); %t=0.1
-%    scatter_plot(GUp,GWp,Gphi,GUe,0,Data); 
+    scatter_plot(GUp,GWp,Gphi,GUe,0,Data); 
 %end
 
 um = zeros(size(Aj,1),1);
